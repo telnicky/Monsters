@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSTMonster.h"
+#import "MSTMonsterView.h"
 
 @interface MSTAppDelegate : UIResponder <UIApplicationDelegate>
 

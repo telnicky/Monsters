@@ -19,6 +19,10 @@
 		6732E6C8188E1E52001D04C1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6732E6B0188E1E51001D04C1 /* UIKit.framework */; };
 		6732E6D0188E1E52001D04C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6732E6CE188E1E52001D04C1 /* InfoPlist.strings */; };
 		6732E6D2188E1E52001D04C1 /* MonstersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6D1188E1E52001D04C1 /* MonstersTests.m */; };
+		6732E6DD188E1EB5001D04C1 /* MSTMonster.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6DC188E1EB5001D04C1 /* MSTMonster.m */; };
+		6732E6E0188E212D001D04C1 /* MSTMonsterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6DF188E212D001D04C1 /* MSTMonsterView.m */; };
+		67AD3424188F0C7F004B2D7C /* monster.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AD3423188F0C7F004B2D7C /* monster.png */; };
+		67AD3427188F2018004B2D7C /* MSTUISliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AD3426188F2018004B2D7C /* MSTUISliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,13 @@
 		6732E6CD188E1E52001D04C1 /* MonstersTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MonstersTests-Info.plist"; sourceTree = "<group>"; };
 		6732E6CF188E1E52001D04C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6732E6D1188E1E52001D04C1 /* MonstersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonstersTests.m; sourceTree = "<group>"; };
+		6732E6DB188E1EB5001D04C1 /* MSTMonster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTMonster.h; sourceTree = "<group>"; };
+		6732E6DC188E1EB5001D04C1 /* MSTMonster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTMonster.m; sourceTree = "<group>"; };
+		6732E6DE188E212D001D04C1 /* MSTMonsterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTMonsterView.h; sourceTree = "<group>"; };
+		6732E6DF188E212D001D04C1 /* MSTMonsterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTMonsterView.m; sourceTree = "<group>"; };
+		67AD3423188F0C7F004B2D7C /* monster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster.png; sourceTree = "<group>"; };
+		67AD3425188F2018004B2D7C /* MSTUISliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTUISliderView.h; sourceTree = "<group>"; };
+		67AD3426188F2018004B2D7C /* MSTUISliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTUISliderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +118,17 @@
 		6732E6B2188E1E51001D04C1 /* Monsters */ = {
 			isa = PBXGroup;
 			children = (
+				67AD3423188F0C7F004B2D7C /* monster.png */,
 				6732E6BB188E1E51001D04C1 /* MSTAppDelegate.h */,
 				6732E6BC188E1E51001D04C1 /* MSTAppDelegate.m */,
 				6732E6BE188E1E52001D04C1 /* Images.xcassets */,
 				6732E6B3188E1E51001D04C1 /* Supporting Files */,
+				6732E6DB188E1EB5001D04C1 /* MSTMonster.h */,
+				6732E6DC188E1EB5001D04C1 /* MSTMonster.m */,
+				6732E6DE188E212D001D04C1 /* MSTMonsterView.h */,
+				6732E6DF188E212D001D04C1 /* MSTMonsterView.m */,
+				67AD3425188F2018004B2D7C /* MSTUISliderView.h */,
+				67AD3426188F2018004B2D7C /* MSTUISliderView.m */,
 			);
 			path = Monsters;
 			sourceTree = "<group>";
@@ -222,6 +240,7 @@
 			files = (
 				6732E6B7188E1E51001D04C1 /* InfoPlist.strings in Resources */,
 				6732E6BF188E1E52001D04C1 /* Images.xcassets in Resources */,
+				67AD3424188F0C7F004B2D7C /* monster.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +261,9 @@
 			files = (
 				6732E6B9188E1E51001D04C1 /* main.m in Sources */,
 				6732E6BD188E1E51001D04C1 /* MSTAppDelegate.m in Sources */,
+				6732E6E0188E212D001D04C1 /* MSTMonsterView.m in Sources */,
+				6732E6DD188E1EB5001D04C1 /* MSTMonster.m in Sources */,
+				67AD3427188F2018004B2D7C /* MSTUISliderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +464,7 @@
 				6732E6D7188E1E52001D04C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6732E6D8188E1E52001D04C1 /* Build configuration list for PBXNativeTarget "MonstersTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +473,7 @@
 				6732E6DA188E1E52001D04C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

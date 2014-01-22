@@ -16,7 +16,12 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    MSTMonster* monster = [[MSTMonster alloc] initWithDefaults];
+    MSTMonsterView* monsterView = [[MSTMonsterView alloc] initWithMonster:monster andWithFrame:[[self window] frame]];
+    [[self window] addSubview:monsterView];
+    
+    return TRUE;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
