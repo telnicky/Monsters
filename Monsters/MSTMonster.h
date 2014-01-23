@@ -33,8 +33,9 @@
 @property float appendages;
 @property float teeth;
 @property float claws;
-@property float name;
+@property NSString* name;
 
 - (id) initWithDefaults;
+- (float) effectiveness;
 
 @end

@@ -9,6 +9,9 @@
 #import "MSTMonsterView.h"
 
 @implementation MSTMonsterView
+{
+    UILabel* _effectivenessLabel;
+}
 
 - (id) initWithMonster:(MSTMonster*)monster andWithFrame:(CGRect)frame
 {
@@ -16,7 +19,6 @@
     if(self == nil)
         return nil;
     
-    [self setBackgroundColor:[UIColor darkGrayColor]];
     [self setMonster:monster];
     [self buildView];
     
@@ -51,6 +53,7 @@
                                              min:MST_MIN_HEIGHT
                                              max:MST_MAX_HEIGHT
                                         andFrame:heightSliderFrame];
+    [heightSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:heightSlider];
     
     // Strength Slider
@@ -66,6 +69,7 @@
                                                  min:MST_MIN_STRENGTH
                                                  max:MST_MAX_STRENGTH
                                             andFrame:strengthSliderFrame];
+    [strengthSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:strengthSlider];
     
     // Armor Slider
@@ -81,6 +85,7 @@
                                            min:MST_MIN_ARMOR
                                            max:MST_MAX_ARMOR
                                       andFrame:armorSliderFrame];
+    [armorSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:armorSlider];
     
     // Appendages Slider
@@ -96,6 +101,7 @@
                                            min:MST_MIN_APPENDAGES
                                            max:MST_MAX_APPENDAGES
                                       andFrame:appendagesSliderFrame];
+    [appendagesSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:appendagesSlider];
     
     
@@ -112,6 +118,7 @@
                                            min:MST_MIN_TEETH
                                            max:MST_MAX_TEETH
                                       andFrame:teethSliderFrame];
+    [teethSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:teethSlider];
     
     
@@ -128,53 +135,31 @@
                                            min:MST_MIN_CLAWS
                                            max:MST_MAX_CLAWS
                                       andFrame:clawsSliderFrame];
+    [clawsSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
     [self addSubview:clawsSlider];
     
     
+    // Effectiveness Label
+    CGRect effectivenessLabelFrame = CGRectZero;
+    effectivenessLabelFrame.size.width = 60.0f;
+    effectivenessLabelFrame.size.height = 25.0f;
+    effectivenessLabelFrame.origin.x = CGRectGetMidX([self frame]) - effectivenessLabelFrame.size.width * 0.5f;
+    effectivenessLabelFrame.origin.y = CGRectGetMaxY(clawsSliderFrame);
+    
+    
+    _effectivenessLabel = [[UILabel alloc] init];
+    [self updateEffectiveness];
+    [_effectivenessLabel setTextColor:[UIColor redColor]];
+    [_effectivenessLabel setFrame:effectivenessLabelFrame];
+    [_effectivenessLabel setAdjustsFontSizeToFitWidth:TRUE];
+    [_effectivenessLabel setFont:[UIFont boldSystemFontOfSize:32]];
+    [self addSubview:_effectivenessLabel];
+    
 }
 
-- (CGRect) buildRectWithX:(float) x Y:(float) y Width:(float) width andHeight:(float)height
+- (void) updateEffectiveness
 {
-    CGRect rect = CGRectZero;
-    rect.origin.x = x;
-    rect.origin.y = y;
-    rect.size.width = width;
-    rect.size.height = height;
-    
-    return rect;
-}
-
-- (void) heightValueChanged:(UISlider*)heightSlider
-{
-    float height = [heightSlider value];
-    [[self monster] setHeight:height];
-    
-    
-    SEL theSelector;
-    NSMethodSignature *aSignature;
-    NSInvocation *anInvocation;
-    
-    theSelector = @selector(height);
-    aSignature = [MSTMonster instanceMethodSignatureForSelector:theSelector];
-    anInvocation = [NSInvocation invocationWithMethodSignature:aSignature];
-    [anInvocation setSelector:theSelector];
-    
-    [anInvocation setTarget:[self monster]];
-    
-    
-    float result;
-    
-    [anInvocation invoke];
-    [anInvocation getReturnValue:&result];
-    
-    printf("%0.1f\n", result);
-}
-
-- (void) setSlider:(UISlider*)slider Min: (float) min Max: (float) max andFrame: (CGRect) frame
-{
-    [slider setMinimumValue:min];
-    [slider setMaximumValue:max];
-    [slider setFrame:frame];
+    [_effectivenessLabel setText:[NSString stringWithFormat:@"%0.1f", [[self monster] effectiveness]]];
 }
 
 @end

@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "MSTMonster.h"
 
-@interface MSTUISliderView : UIView
-@property SEL selector;
+@interface MSTUISliderView : UIControl
+@property SEL setSelector;
+@property SEL getSelector;
 @property NSString* property;
 @property MSTMonster* monster;
 @property float min;

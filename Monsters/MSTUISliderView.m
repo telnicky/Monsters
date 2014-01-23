@@ -10,8 +10,10 @@
 
 @implementation MSTUISliderView
 {
-    NSInvocation* _invocation;
-    NSMethodSignature* _signature;
+    NSInvocation* _setInvocation;
+    NSInvocation* _getInvocation;
+    NSMethodSignature* _setSignature;
+    NSMethodSignature* _getSignature;
     UILabel* _valueLabel;
 }
 
@@ -21,23 +23,26 @@
     if(self == nil)
         return nil;
 
+    NSString* getSelector = [property lowercaseString];
     NSString* setSelector = [@"set" stringByAppendingString:[property capitalizedString]];
     setSelector = [setSelector stringByAppendingString:@":"];
     
     [self setMonster:monster];
-    [self setSelector:NSSelectorFromString(setSelector)];
+    [self setSetSelector:NSSelectorFromString(setSelector)];
+    [self setGetSelector:NSSelectorFromString(getSelector)];
     [self setProperty:property];
     [self setMin: min];
     [self setMax: max];
+    _setInvocation = [self buildInvocation:_setInvocation selector:[self setSelector] andSignature:_setSignature];
+    _getInvocation = [self buildInvocation:_getInvocation selector:[self getSelector] andSignature:_getSignature];
+    
     [self buildSlider];
-    _invocation = [self buildInvocation:_invocation andSignature:_signature];
     
     return self;
 }
 
 - (void) buildSlider
 {
-    
     // Label
     CGRect labelFrame = CGRectZero;
     labelFrame.origin.x = 10.0f;
@@ -57,10 +62,14 @@
     valueLabelFrame.origin.y = 0.0f;
     valueLabelFrame.size.width = [self frame].size.width * 0.10f;
     valueLabelFrame.size.height = 20.0f;
-    
+
+    float result;
+    [_getInvocation invoke];
+    [_getInvocation getReturnValue:&result];
+
     _valueLabel = [[UILabel alloc] init];
     [_valueLabel setFrame:valueLabelFrame];
-    [_valueLabel setText:[NSString stringWithFormat:@"%0.0f", [self min]]];
+    [_valueLabel setText:[NSString stringWithFormat:@"%0.0f", result]];
     [_valueLabel setAdjustsFontSizeToFitWidth:TRUE];
     [self addSubview:_valueLabel];
     
@@ -75,16 +84,16 @@
     [slider setMinimumValue:[self min]];
     [slider setMaximumValue:[self max]];
     [slider setFrame:sliderFrame];
+    [slider setValue:result];
     [slider addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:slider];
 }
 
-- (NSInvocation*) buildInvocation:(NSInvocation*)invocation andSignature:(NSMethodSignature*)signature
+- (NSInvocation*) buildInvocation:(NSInvocation*)invocation selector:(SEL)selector andSignature:(NSMethodSignature*)signature
 {
-    SEL theSelector = [self selector];
-    signature = [MSTMonster instanceMethodSignatureForSelector:theSelector];
+    signature = [MSTMonster instanceMethodSignatureForSelector:selector];
     invocation = [NSInvocation invocationWithMethodSignature:signature];
-    [invocation setSelector:theSelector];
+    [invocation setSelector:selector];
     
     [invocation setTarget:[self monster]];
     
@@ -95,10 +104,9 @@
 {
     float value = [slider value];
     [_valueLabel setText:[NSString stringWithFormat:@"%0.0f", value]];
-    [_invocation setArgument:&value atIndex:2];
-    [_invocation invoke];
+    [_setInvocation setArgument:&value atIndex:2];
+    [_setInvocation invoke];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 @end
-
-
