@@ -21,6 +21,10 @@
 		6732E6D2188E1E52001D04C1 /* MonstersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6D1188E1E52001D04C1 /* MonstersTests.m */; };
 		6732E6DD188E1EB5001D04C1 /* MSTMonster.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6DC188E1EB5001D04C1 /* MSTMonster.m */; };
 		6732E6E0188E212D001D04C1 /* MSTMonsterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6732E6DF188E212D001D04C1 /* MSTMonsterView.m */; };
+		6755376B1891C70700781338 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6755376A1891C70700781338 /* right-arrow.png */; };
+		6755376D1891C70F00781338 /* right-arrow-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6755376C1891C70F00781338 /* right-arrow-disabled.png */; };
+		6755376F1891C71600781338 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6755376E1891C71600781338 /* left-arrow.png */; };
+		675537711891C71E00781338 /* left-arrow-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 675537701891C71E00781338 /* left-arrow-disabled.png */; };
 		67AD3424188F0C7F004B2D7C /* monster.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AD3423188F0C7F004B2D7C /* monster.png */; };
 		67AD3427188F2018004B2D7C /* MSTUISliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AD3426188F2018004B2D7C /* MSTUISliderView.m */; };
 /* End PBXBuildFile section */
@@ -56,6 +60,10 @@
 		6732E6DC188E1EB5001D04C1 /* MSTMonster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTMonster.m; sourceTree = "<group>"; };
 		6732E6DE188E212D001D04C1 /* MSTMonsterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTMonsterView.h; sourceTree = "<group>"; };
 		6732E6DF188E212D001D04C1 /* MSTMonsterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTMonsterView.m; sourceTree = "<group>"; };
+		6755376A1891C70700781338 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		6755376C1891C70F00781338 /* right-arrow-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow-disabled.png"; sourceTree = "<group>"; };
+		6755376E1891C71600781338 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
+		675537701891C71E00781338 /* left-arrow-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow-disabled.png"; sourceTree = "<group>"; };
 		67AD3423188F0C7F004B2D7C /* monster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster.png; sourceTree = "<group>"; };
 		67AD3425188F2018004B2D7C /* MSTUISliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTUISliderView.h; sourceTree = "<group>"; };
 		67AD3426188F2018004B2D7C /* MSTUISliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTUISliderView.m; sourceTree = "<group>"; };
@@ -118,6 +126,10 @@
 		6732E6B2188E1E51001D04C1 /* Monsters */ = {
 			isa = PBXGroup;
 			children = (
+				675537701891C71E00781338 /* left-arrow-disabled.png */,
+				6755376E1891C71600781338 /* left-arrow.png */,
+				6755376C1891C70F00781338 /* right-arrow-disabled.png */,
+				6755376A1891C70700781338 /* right-arrow.png */,
 				67AD3423188F0C7F004B2D7C /* monster.png */,
 				6732E6BB188E1E51001D04C1 /* MSTAppDelegate.h */,
 				6732E6BC188E1E51001D04C1 /* MSTAppDelegate.m */,
@@ -238,6 +250,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6755376B1891C70700781338 /* right-arrow.png in Resources */,
+				6755376D1891C70F00781338 /* right-arrow-disabled.png in Resources */,
+				6755376F1891C71600781338 /* left-arrow.png in Resources */,
+				675537711891C71E00781338 /* left-arrow-disabled.png in Resources */,
 				6732E6B7188E1E51001D04C1 /* InfoPlist.strings in Resources */,
 				6732E6BF188E1E52001D04C1 /* Images.xcassets in Resources */,
 				67AD3424188F0C7F004B2D7C /* monster.png in Resources */,

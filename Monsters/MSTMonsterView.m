@@ -10,7 +10,10 @@
 
 @implementation MSTMonsterView
 {
+    NSMutableArray* _monsters;
+    int _currentIndex;
     UILabel* _effectivenessLabel;
+    UIButton* _backButton;
 }
 
 - (id) initWithMonster:(MSTMonster*)monster andWithFrame:(CGRect)frame
@@ -18,8 +21,11 @@
     self = [self initWithFrame:frame];
     if(self == nil)
         return nil;
-    
+
+    _currentIndex = 0;
+    _monsters = [[NSMutableArray alloc] init];
     [self setMonster:monster];
+    [_monsters addObject:monster];
     [self buildView];
     
     return self;
@@ -155,11 +161,72 @@
     [_effectivenessLabel setFont:[UIFont boldSystemFontOfSize:32]];
     [self addSubview:_effectivenessLabel];
     
+    
+    // Next button
+    CGRect nextButtonFrame = CGRectZero;
+    nextButtonFrame.size.width = 34.0f;
+    nextButtonFrame.size.height = 34.0f;
+    nextButtonFrame.origin.x = CGRectGetMaxX([self frame]) - 40.0f;
+    nextButtonFrame.origin.y = effectivenessLabelFrame.origin.y - 10.0f;
+    
+    UIButton* nextButton = [[UIButton alloc] init];
+    [nextButton setImage:[UIImage imageNamed:@"right-arrow"] forState:UIControlStateNormal];
+    [nextButton setFrame:nextButtonFrame];
+    [nextButton addTarget:self action:@selector(nextMonster) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:nextButton];
+    
+    // Back button
+    CGRect backButtonFrame = nextButtonFrame;
+    backButtonFrame.origin.x = 40.0f;
+    
+    _backButton = [[UIButton alloc] init];
+    [_backButton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
+    [_backButton setImage:[UIImage imageNamed:@"left-arrow-disabled"] forState:UIControlStateDisabled];
+    [_backButton setFrame:backButtonFrame];
+    _backButton.enabled = (_currentIndex == 0) ? FALSE : TRUE;
+    [_backButton addTarget:self action:@selector(backMonster) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_backButton];
+    
 }
 
 - (void) updateEffectiveness
 {
     [_effectivenessLabel setText:[NSString stringWithFormat:@"%0.1f", [[self monster] effectiveness]]];
+}
+
+- (void) nextMonster
+{
+    _currentIndex++;
+    if (_currentIndex == [_monsters count]) {
+        MSTMonster* newMonster = [[MSTMonster alloc] initWithDefaults];
+        [_monsters addObject:newMonster];
+    }
+    
+    [self setMonster:[_monsters objectAtIndex:_currentIndex]];
+    [self redrawView];
+    
+    _backButton.enabled = TRUE;
+}
+
+- (void) backMonster
+{
+    _currentIndex--;
+    if (_currentIndex == 0) {
+        _backButton.enabled = FALSE;
+    }
+    
+    [self setMonster:[_monsters objectAtIndex:_currentIndex]];
+    [self redrawView];
+}
+
+- (void) redrawView
+{
+    NSArray *subViews = [self subviews];
+    for (UIView *view in subViews) {
+        [view removeFromSuperview];
+    }
+    
+    [self buildView];
 }
 
 @end
