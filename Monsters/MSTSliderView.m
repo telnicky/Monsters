@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Travis Elnicky. All rights reserved.
 //
 
-#import "MSTUISliderView.h"
+#import "MSTSliderView.h"
 
-@implementation MSTUISliderView
+@implementation MSTSliderView
 {
     NSInvocation* _setInvocation;
     NSInvocation* _getInvocation;

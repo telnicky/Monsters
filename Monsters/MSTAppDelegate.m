@@ -18,7 +18,7 @@
     [self.window makeKeyAndVisible];
     
     MSTMonster* monster = [[MSTMonster alloc] initWithDefaults];
-    MSTMonsterView* monsterView = [[MSTMonsterView alloc] initWithMonster:monster andWithFrame:[[self window] frame]];
+    MSTMonstersView* monsterView = [[MSTMonstersView alloc] initWithMonster:monster andWithFrame:[[self window] frame]];
     [[self window] addSubview:monsterView];
     
     return TRUE;

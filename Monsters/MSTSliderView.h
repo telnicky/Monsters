@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MSTMonster.h"
 
-@interface MSTUISliderView : UIControl
+@interface MSTSliderView : UIControl
 @property SEL setSelector;
 @property SEL getSelector;
 @property NSString* property;

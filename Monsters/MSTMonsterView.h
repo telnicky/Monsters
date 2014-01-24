@@ -2,16 +2,15 @@
 //  MSTMonsterView.h
 //  Monsters
 //
-//  Created by travis elnicky on 1/20/14.
+//  Created by travis elnicky on 1/23/14.
 //  Copyright (c) 2014 Travis Elnicky. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "MSTMonster.h"
-#import "MSTUISliderView.h"
 
 @interface MSTMonsterView : UIView
 @property MSTMonster* monster;
+- (id)initWithMonster:(MSTMonster*)monster andWithFrame:(CGRect)frame;
 
-- (id) initWithMonster:(MSTMonster*) monster andWithFrame:(CGRect) frame;
 @end
