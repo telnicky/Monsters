@@ -77,6 +77,7 @@
                                              max:MST_MAX_HEIGHT
                                         andFrame:heightSliderFrame];
     [heightSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
+    [heightSlider addTarget:_monsterView action:@selector(animateMonsterHeight) forControlEvents:UIControlEventValueChanged];
     [self addSubview:heightSlider];
     
     // Strength Slider
@@ -93,6 +94,7 @@
                                                  max:MST_MAX_STRENGTH
                                             andFrame:strengthSliderFrame];
     [strengthSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
+    [strengthSlider addTarget:_monsterView action:@selector(animateMonsterStrength) forControlEvents:UIControlEventValueChanged];
     [self addSubview:strengthSlider];
     
     // Armor Slider
@@ -109,6 +111,7 @@
                                            max:MST_MAX_ARMOR
                                       andFrame:armorSliderFrame];
     [armorSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
+    [armorSlider addTarget:_monsterView action:@selector(animateMonsterArmor) forControlEvents:UIControlEventValueChanged];
     [self addSubview:armorSlider];
     
     // Appendages Slider
@@ -209,8 +212,6 @@
 - (void) updateEffectiveness
 {
     [_effectivenessLabel setText:[NSString stringWithFormat:@"%0.1f", [[self monster] effectiveness]]];
-    
-    [_monsterView setNeedsDisplay];
 }
 
 - (void) nextMonster
@@ -246,7 +247,6 @@
     }
     
     [self buildView];
-    [_monsterView setNeedsDisplay];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -264,5 +264,7 @@
 {
     [[self monster] setName:[textField text]];
 }
+
+
 
 @end

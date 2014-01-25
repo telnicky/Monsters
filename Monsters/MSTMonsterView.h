@@ -11,6 +11,10 @@
 
 @interface MSTMonsterView : UIView
 @property MSTMonster* monster;
-- (id)initWithMonster:(MSTMonster*)monster andWithFrame:(CGRect)frame;
+@property UIColor* armorColor;
 
+- (id)initWithMonster:(MSTMonster*)monster andWithFrame:(CGRect)frame;
+- (void)animateMonsterHeight;
+- (void)animateMonsterStrength;
+- (void)animateMonsterArmor;
 @end
