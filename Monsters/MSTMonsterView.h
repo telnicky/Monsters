@@ -17,4 +17,5 @@
 - (void)animateMonsterHeight;
 - (void)animateMonsterStrength;
 - (void)animateMonsterArmor;
+- (void)animateMonsterTeeth;
 @end

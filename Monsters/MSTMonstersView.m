@@ -14,6 +14,7 @@
     int _currentIndex;
     UILabel* _effectivenessLabel;
     UIButton* _backButton;
+    UIButton* _nextButton;
     MSTMonsterView* _monsterView;
     UITextField* _nameTextField;
 }
@@ -40,7 +41,7 @@
     monsterViewFrame.origin.x = self.frame.origin.x;
     monsterViewFrame.origin.y = self.frame.origin.y + 50.0f;
     monsterViewFrame.size.width = [self frame].size.width;
-    monsterViewFrame.size.height = [self frame].size.height * 0.35f;
+    monsterViewFrame.size.height = [self frame].size.height * 0.25f;
     
     _monsterView = [[MSTMonsterView alloc] initWithMonster:[self monster] andWithFrame:monsterViewFrame];
     [self addSubview:_monsterView];
@@ -145,6 +146,7 @@
                                            max:MST_MAX_TEETH
                                       andFrame:teethSliderFrame];
     [teethSlider addTarget:self action:@selector(updateEffectiveness) forControlEvents:UIControlEventValueChanged];
+    [teethSlider addTarget:_monsterView action:@selector(animateMonsterTeeth) forControlEvents:UIControlEventValueChanged];
     [self addSubview:teethSlider];
     
     
@@ -170,7 +172,7 @@
     effectivenessLabelFrame.size.width = 60.0f;
     effectivenessLabelFrame.size.height = 25.0f;
     effectivenessLabelFrame.origin.x = CGRectGetMidX([self frame]) - effectivenessLabelFrame.size.width * 0.5f;
-    effectivenessLabelFrame.origin.y = CGRectGetMaxY(clawsSliderFrame);
+    effectivenessLabelFrame.origin.y = CGRectGetMaxY(clawsSliderFrame) + 10.0f;
     
     
     _effectivenessLabel = [[UILabel alloc] init];
@@ -186,18 +188,20 @@
     CGRect nextButtonFrame = CGRectZero;
     nextButtonFrame.size.width = 34.0f;
     nextButtonFrame.size.height = 34.0f;
-    nextButtonFrame.origin.x = CGRectGetMaxX([self frame]) - 40.0f;
-    nextButtonFrame.origin.y = effectivenessLabelFrame.origin.y - 10.0f;
+    nextButtonFrame.origin.x = CGRectGetMaxX([self bounds]) - 45.0f;
+    nextButtonFrame.origin.y = effectivenessLabelFrame.origin.y;
     
-    UIButton* nextButton = [[UIButton alloc] init];
-    [nextButton setImage:[UIImage imageNamed:@"right-arrow"] forState:UIControlStateNormal];
-    [nextButton setFrame:nextButtonFrame];
-    [nextButton addTarget:self action:@selector(nextMonster) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:nextButton];
+    _nextButton = [[UIButton alloc] init];
+    [_nextButton setImage:[UIImage imageNamed:@"right-arrow"] forState:UIControlStateNormal];
+    [_nextButton setImage:[UIImage imageNamed:@"right-arrow-disabled"] forState:UIControlStateDisabled];
+    _nextButton.enabled = ([[[self monster] name] length] == 0) ? FALSE : TRUE;
+    [_nextButton setFrame:nextButtonFrame];
+    [_nextButton addTarget:self action:@selector(nextMonster) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_nextButton];
     
     // Back button
     CGRect backButtonFrame = nextButtonFrame;
-    backButtonFrame.origin.x = 40.0f;
+    backButtonFrame.origin.x = CGRectGetMinX([self bounds]) + 11.0f;
     
     _backButton = [[UIButton alloc] init];
     [_backButton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
@@ -263,6 +267,7 @@
 - (void) updateMonsterName:(UITextField*)textField
 {
     [[self monster] setName:[textField text]];
+    _nextButton.enabled = ([[[self monster] name] length] == 0) ? FALSE : TRUE;
 }
 
 

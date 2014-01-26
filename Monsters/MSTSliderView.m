@@ -43,11 +43,16 @@
 
 - (void) buildSlider
 {
+    
+    float result;
+    [_getInvocation invoke];
+    [_getInvocation getReturnValue:&result];
+    
     // Label
     CGRect labelFrame = CGRectZero;
     labelFrame.origin.x = 10.0f;
     labelFrame.origin.y = 0.0f;
-    labelFrame.size.width = [self frame].size.width * 0.2f;
+    labelFrame.size.width = [self frame].size.width * 0.3f;
     labelFrame.size.height = 20.0f;
     
     UILabel* label = [[UILabel alloc] init];
@@ -56,26 +61,9 @@
     [label setAdjustsFontSizeToFitWidth:TRUE];
     [self addSubview:label];
     
-    // Value Label
-    CGRect valueLabelFrame = CGRectZero;
-    valueLabelFrame.origin.x = CGRectGetMaxX(labelFrame);
-    valueLabelFrame.origin.y = 0.0f;
-    valueLabelFrame.size.width = [self frame].size.width * 0.10f;
-    valueLabelFrame.size.height = 20.0f;
-
-    float result;
-    [_getInvocation invoke];
-    [_getInvocation getReturnValue:&result];
-
-    _valueLabel = [[UILabel alloc] init];
-    [_valueLabel setFrame:valueLabelFrame];
-    [_valueLabel setText:[NSString stringWithFormat:@"%0.0f", result]];
-    [_valueLabel setAdjustsFontSizeToFitWidth:TRUE];
-    [self addSubview:_valueLabel];
-    
     // Slider
     CGRect sliderFrame = CGRectZero;
-    sliderFrame.origin.x = CGRectGetMaxX(valueLabelFrame);
+    sliderFrame.origin.x = CGRectGetMaxX(labelFrame);
     sliderFrame.origin.y = 0.0f;
     sliderFrame.size.width = [self frame].size.width * 0.50f;
     sliderFrame.size.height = 20.0f;
@@ -87,6 +75,19 @@
     [slider setValue:result];
     [slider addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:slider];
+    
+    // Value Label
+    CGRect valueLabelFrame = CGRectZero;
+    valueLabelFrame.origin.x = CGRectGetMaxX(sliderFrame);
+    valueLabelFrame.origin.y = 0.0f;
+    valueLabelFrame.size.width = [self frame].size.width * 0.10f;
+    valueLabelFrame.size.height = 20.0f;
+    
+    _valueLabel = [[UILabel alloc] init];
+    [_valueLabel setFrame:valueLabelFrame];
+    [_valueLabel setText:[NSString stringWithFormat:@"%0.0f", result]];
+    [_valueLabel setAdjustsFontSizeToFitWidth:TRUE];
+    [self addSubview:_valueLabel];
 }
 
 - (NSInvocation*) buildInvocation:(NSInvocation*)invocation selector:(SEL)selector andSignature:(NSMethodSignature*)signature
